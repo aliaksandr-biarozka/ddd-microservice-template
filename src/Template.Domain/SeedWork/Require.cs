@@ -10,5 +10,13 @@ namespace Template.Domain.SeedWork
                 throw new DomainRuleViolationException(message);
             }
         }
+
+        public static void ThatNotNullOrEmpty(string value, string message)
+        {
+            if(String.IsNullOrWhiteSpace(value))
+            {
+                throw new DomainRuleViolationException(message);
+            }
+        }
     }
 }

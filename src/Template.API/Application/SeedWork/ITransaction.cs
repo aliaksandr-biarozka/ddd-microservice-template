@@ -1,4 +1,4 @@
-﻿namespace Template.API.Application
+﻿namespace Template.API.Application.SeedWork
 {
     public interface ITransaction
     {

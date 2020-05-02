@@ -13,7 +13,7 @@ namespace Template.Domain
 
         public decimal Price { get; }
 
-        public Discount Discount { get; }
+        public Discount Discount { get; private set; }
 
         public OrderItem(int productId, string productName, int quantity, decimal price, Discount discount)
         {
@@ -31,6 +31,14 @@ namespace Template.Domain
 
         public decimal GetTotalPrice() => Discount?.ApplyTo(Quantity * Price) ?? Quantity * Price;
 
+        internal void SetNewDiscount(Discount discount) => Discount = discount;
+
         public void AddItems(int count) => Quantity += count;
+
+        public void RemoveItems(int count)
+        {
+            Require.That(Quantity - count > 0, "can not remove all items");
+            Quantity -= count;
+        }
     }
 }

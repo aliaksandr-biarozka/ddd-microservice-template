@@ -39,4 +39,12 @@ namespace Template.Domain.SeedWork
             return fields.Select(f => f.GetValue(null)).Cast<T>();
         }
     }
+
+    public static class EnumerationExtensions
+    {
+        public static bool IsOneOf<T>(this T item, params T[] items) where T: Enumeration
+        {
+            return items.Contains(item);
+        }
+    }
 }
