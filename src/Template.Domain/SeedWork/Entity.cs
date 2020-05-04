@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Template.Domain.SeedWork
 {
-    public abstract class Entity<TId>
+    public abstract class Entity
     {
         private List<DomainEvent> _events;
 
-        public TId Id { get; protected set; }
+        public long Id { get; protected set; }
 
         public IReadOnlyList<DomainEvent> Events => _events;
 
-        private Entity() { }
+        protected Entity() { }
 
         public void AddDomainEvent(DomainEvent @event)
         {
@@ -22,10 +21,5 @@ namespace Template.Domain.SeedWork
         public void RemoveDomainEvent(DomainEvent @event) => _events?.Remove(@event);
 
         public void RemoveAllDomainEvents() => _events?.Clear();
-         
-
-        public abstract class IntEntity : Entity<int> { }
-
-        public abstract class GuidEntity : Entity<Guid> { }
     }
 }

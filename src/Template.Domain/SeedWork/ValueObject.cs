@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Template.Domain.SeedWork
 {
-    public abstract class ValueObject : IEquatable<ValueObject>
+    public abstract class ValueObject
     {
         public static bool operator ==(ValueObject left, ValueObject right)
         {
@@ -20,15 +19,15 @@ namespace Template.Domain.SeedWork
 
         protected abstract IEnumerable<object> EqualityCheckAttributes { get; }
 
-        public bool Equals(ValueObject other)
+        public override bool Equals(object obj)
         {
-            if (other == null) return false;
+            if (obj == null || !(obj is ValueObject valueObject)) return false;
 
             var thisAttributes = EqualityCheckAttributes.GetEnumerator();
-            var otherAttributes = EqualityCheckAttributes.GetEnumerator();
-            while(thisAttributes.MoveNext() && otherAttributes.MoveNext())
+            var otherAttributes = valueObject.EqualityCheckAttributes.GetEnumerator();
+            while (thisAttributes.MoveNext() && otherAttributes.MoveNext())
             {
-                if(thisAttributes.Current is null ^ otherAttributes.Current is null)
+                if (thisAttributes.Current is null ^ otherAttributes.Current is null)
                 {
                     return false;
                 }
@@ -41,8 +40,6 @@ namespace Template.Domain.SeedWork
 
             return !thisAttributes.MoveNext() && !otherAttributes.MoveNext();
         }
-
-        public override bool Equals(object obj) => Equals(obj as ValueObject);
 
         public override int GetHashCode() => EqualityCheckAttributes.Aggregate(17,
                 (current, attribute) => current * 31 + (attribute == null ? 0 : attribute.GetHashCode()));

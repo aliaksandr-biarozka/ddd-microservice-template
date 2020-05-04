@@ -1,9 +1,8 @@
 ﻿using Template.Domain.SeedWork;
-using static Template.Domain.SeedWork.Entity<int>;
 
 namespace Template.Domain
 {
-    public class OrderItem : IntEntity
+    public class OrderItem : Entity
     {
         public int ProductId { get; }
 

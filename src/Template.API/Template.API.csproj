@@ -6,7 +6,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Application\SeedWork\" />
+    <ProjectReference Include="..\Template.Application\Template.Application.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

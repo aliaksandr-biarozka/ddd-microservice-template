@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Template.Domain.SeedWork;
-using static Template.Domain.SeedWork.Entity<int>;
 
 namespace Template.Domain
 {
-    public class Order : IntEntity, IAggregateRoot
+    public class Order : Entity, IAggregateRoot
     {
         private readonly Guid _customerId;
         private readonly List<OrderItem> _orderItems;
@@ -75,13 +74,13 @@ namespace Template.Domain
             _orderStatus = OrderStatus.Submitted;
         }
 
-        public void AllowEdit()
+        public void AllowEdditing()
         {
             Require.That(_orderStatus == OrderStatus.Submitted, $"the {_orderStatus} order can not be pending again");
             _orderStatus = OrderStatus.Pending;
         }
 
-        public void Paying()
+        public void InitiatePaying()
         {
             Require.That(_orderStatus == OrderStatus.Submitted, $"can not start payment of the {_orderStatus} order");
             _orderStatus = OrderStatus.PaymentPending;
