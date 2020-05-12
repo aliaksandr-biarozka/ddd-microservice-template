@@ -7,32 +7,32 @@ namespace Template.Domain.SeedWork
 {
     public abstract class Enumeration : IComparable, IEquatable<Enumeration>
     {
-        private int _id;
+        public int Id { get; }
 
-        private string _name;
+        public string Name { get; }
 
         protected Enumeration(int id, string name)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
         }
 
-        public override string ToString() => _name;
+        public override string ToString() => Name;
 
-        public int CompareTo(object obj) => _id.CompareTo(((Enumeration)obj)._id);
+        public int CompareTo(object obj) => Id.CompareTo(((Enumeration)obj).Id);
 
         public bool Equals(Enumeration other)
         {
             if (other == null) return false;
 
-            return GetType() == other.GetType() && _id == other._id && _name == other._name;
+            return GetType() == other.GetType() && Id == other.Id && Name == other.Name;
         }
 
         public override bool Equals(object obj) => Equals(obj as Enumeration);
 
-        public override int GetHashCode() => (_id, _name).GetHashCode();
+        public override int GetHashCode() => (Id, Name).GetHashCode();
 
-        public IEnumerable<T> GetAll<T>() where T : Enumeration
+        public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
             var fields = typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
 

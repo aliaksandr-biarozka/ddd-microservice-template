@@ -124,6 +124,8 @@ namespace Template.Domain
             _orderStatus = OrderStatus.Shipped;
         }
 
+        public Guid CustomerId => _customerId;
+
         public IReadOnlyList<OrderItem> OrderItems => _orderItems;
 
         public OrderStatus OrderStatus => _orderStatus;

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Template.Domain;
 
-namespace Template.Infrastructure
+namespace Template.Infrastructure.Repositories
 {
     public class OrderRepository : IOrderRepository
     {

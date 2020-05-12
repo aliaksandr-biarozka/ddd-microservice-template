@@ -3,7 +3,7 @@ using Template.Domain.SeedWork;
 
 namespace Template.Application.SeedWork
 {
-    internal interface IDomainEventHandler<T> where T : DomainEvent
+    public interface IDomainEventHandler<T> where T : DomainEvent
     {
         Task Handle(T @event);
     }
